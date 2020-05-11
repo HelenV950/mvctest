@@ -10,8 +10,8 @@ class UserValidator
    * @var erray
    */
   protected $errors = [
-    'name_error'      => 'The name should contain more than 2 letters',
-    'lastname_error'  => 'The lastname should contain more than 2 letters',
+    // 'name_error'      => 'The name should contain more than 2 letters',
+    // 'lastname_error'  => 'The lastname should contain more than 2 letters',
     'nickname_error'  => 'The nickname should contain more than 2 letters',
     'birthday_error'  => 'Birsday date is invalid',
     'email_error'     => 'Email is invalid',
@@ -22,8 +22,8 @@ class UserValidator
    * @var erray
    */
   protected $rules = [
-    'name'      => '/[A-Za-zА-Яа-я]{2,}/',
-    'lastname'  => '/[A-Za-zА-Яа-я]{2,}/',
+    // 'name'      => '/[A-Za-zА-Яа-я]{2,}/',
+    // 'lastname'  => '/[A-Za-zА-Яа-я]{2,}/',
     'nickname'  => '/[A-Za-zА-Яа-я]{2,}/',
     'birthday'  => '/[\d]{4}-[\d]{2}-[\d]{2}/',
     'email'     => '/^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/',

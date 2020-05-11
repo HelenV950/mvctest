@@ -15,7 +15,7 @@
       <div class=" col-10">
         <h1>Create An Account</h1>
         <form method="POST" action="/user/store">   
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label for="exampleInputFirstName">Name</label>
             <input type="text" 
             class="form-control" 
@@ -26,9 +26,9 @@
             required>
             
          
-            <?php if(!empty($first_name_error)): ?>
+            <?php if(!empty($name_error)): ?>
                 <div class="alert alert-danger" role="alert"> 
-                <?php echo $first_name_error; ?>   
+                <?php echo $name_error; ?>   
                 </div>
                 <?php endif; ?>
           </div>
@@ -44,13 +44,13 @@
             required>
 
             
-            <?php if(!empty($last_name_error)): ?>
+            <?php if(!empty($lastname_error)): ?>
                 <div class="alert alert-danger" role="alert"> 
-                <?php echo $last_name_error; ?>   
+                <?php echo $lastname_error; ?>   
                 </div>
                 <?php endif; ?>
           </div>
-         
+          -->
 
           <div class="form-group">
             <label for="exampleInputNickName">Nick Name</label>
@@ -63,9 +63,9 @@
             required>
 
            
-            <?php if(!empty($nick_name_error)): ?>
+            <?php if(!empty($nickname_error)): ?>
                 <div class="alert alert-danger" role="alert"> 
-                <?php echo $nick_name_error; ?>   
+                <?php echo $nickname_error; ?>   
                 </div>
                 <?php endif; ?>
           </div>

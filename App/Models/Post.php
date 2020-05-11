@@ -1,56 +1,107 @@
 <?php
 namespace App\Models;
 
+use PDO;
 
-class Post
+class Post extends \App\Components\Model
 {
   /**
-   * Return single Post item with specified id
-   * @param int $id
+   * Post consrtructor
    */
 
+  protected $tableName = 'posts';
 
-  public static function getPostItemById($id)
+  public function __construct()
   {
-    //запрос в базу данных
-    $postItem = 'НОВОСТЬ';
-    return $postItem;
-
+    $this->getDB();
   }
+
+  /**
+   * Get all users as associative array
+   * 
+   * @param array $fields
+   * @return string
+   */
+  public function insert(array $fields)
+  {
+    $fields['create_at'] = date('Y-m-d H:i:s');
+    $sql = "INSERT INTO $this->tableName (nickname, title, content, image, create_at) VALUES (:nickname, :title, :content, :image, :create_at)";
+    $sth = $this->db->prepare($sql);
+    $sth->execute($fields);
+
+    return $this->db->lastInsertId();
+  }
+
 
 
   /**
-   * Return an array of Post items
+   * @param int $id
+   * @return bool
    */
-
-  public static function getPostList()
+  public function getPostById(int $id)
   {
-    //запрос в базу данных
+    $sql = "SELECT * FROM $this->tableName WHERE id=:id";
+    $sth = $this->db->prepare($sql);
+    $sth->execute([':id' => $id]);
+    $post = $sth->fetch(PDO::FETCH_ASSOC);
 
-    // $pdo = new PDO('mysql:host=localhost;dbname=mvc_test', "root", '');
-
-    // $PostList = array();
-    // $result = $pdo->query('SELEST id, title, data, shot_content FROM Post ORDER BY date DESC LIMIT 10');
-
-    $postList ='МНОГО НОВОСТЕЙ';
-
-    // $i = 0;
-
-    // while ($row = $result->fetch()) {
-    //   $PostList[$i]['id'] = $row['id'];
-    //   $PostList[$i]['title'] = $row['title'];
-    //   $PostList[$i]['date'] = $row['date'];
-    //   $PostList[$i]['shot_content'] = $row['shot_content'];
-    //   $i++;
-    // }
-    return $postList;
+    return !empty($post) ? $post : false;
   }
 
-  public static function getPostForm()
-  {
-    //запрос в базу данных
-    $postForm = 'СОЗДАТЬ ПОСТ';
-    return $postForm;
 
+  public function getAllPost()
+  {
+    $sql = "SELECT * FROM $this->tableName ORDER BY id";
+    $sth = $this->db->prepare($sql);
+    $sth->execute();
+    $post = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return !empty($post) ? $post : false;
   }
+
+  /**
+   * @param int $id
+   * @return bool
+   */
+  public function getPostByNickName(string $nickname)
+  {
+    $sql = "SELECT * FROM $this->tableName WHERE nickname = :nickname";
+    $sth = $this->db->prepare($sql);
+    $sth->execute([':nickname' => $nickname]);
+    $post = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return !empty($post) ? $post : false;
+  }
+
+  public function delete(int $id)
+  {
+      $sql = "DELETE FROM $this->tableName WHERE  id = :id";
+      $sth = $this->db->prepare($sql);
+      $sth->execute([':id' => $id]);
+
+      return;
+  }
+
+  public function update(array $fields)
+  {
+      $img = isset($fields['image']) ? ', image=:image' : '';
+
+      $sql = "UPDATE $this->tableName SET title=:title, content=:content $img  WHERE id=:id";
+
+      $sth = $this->db->prepare($sql);
+      $result = $sth->execute($fields);
+
+      return $result;
+  }
+
+  public function selectPostByUserId(int $user_id)
+  {
+      $sql = "SELECT * FROM $this->tableName WHERE  user_id = :user_id";
+      $sth = $this->db->prepare($sql);
+      $sth->execute([':user_id' => $user_id]);
+      $post = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+      return !empty($post) ? $post : false;
+  }
+
 }

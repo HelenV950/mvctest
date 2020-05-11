@@ -9,12 +9,11 @@ return array(
    'post/store'              => 'post/store',
   
    ''                        => 'home/index',
-  'home'                    => 'home/index',
+  'home'                     => 'home/index',
 
-  'products'                => 'product/list',
   'login'                   => 'auth/login',
   'registration'            => 'auth/register',
-  'auth'                    => 'auth/verity',
+  'auth'                    => 'auth/auth',
   'logout'                  => 'auth/logout',
 
   'user/store'              => 'user/store',

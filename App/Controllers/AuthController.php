@@ -20,7 +20,7 @@ class AuthController extends Controller
     
   }
 
-  public function actionVerity()
+  public function actionAuth()
   {
     unset($_SESSION['error']['login']['common']);
     $fields = filter_input_array(INPUT_POST, $_POST, 1);
@@ -30,6 +30,7 @@ class AuthController extends Controller
     if ($userData = $user->getUserByEmail($fields['email'])){
       if(password_verify($fields['password'], $userData['password'])){
         SessionHelper::setUserData('id', $userData['id']);
+        SessionHelper::setUserData('name', $userData['name'] . '' . $userData['lastname']);
         site_redirect('home');
         return;
       } else{

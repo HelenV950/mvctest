@@ -7,38 +7,38 @@ use App\Helpers\Session\SessionHelper;
 class ImageHelper
 {
 /**
- * folder for downloading files
+ * folder for downloading images
  */
   protected $uploadDir = 'images/';
-  //ASSETS_URL
+  //ASSETS_PATH
 
-  public function upload(array $file): string
+  public function upload(array $image): string
   {
 
-    $userId = SessionHelper::getUserId();
-    $folders = $this->uploadsDir . "{$userId}/";
+    $userNickName = SessionHelper::getUserNickName();
+    $folders      = $this->uploadsDir . "{$userNickName}/";
     $this->createFolders($folders);
-    $relativePath = $folders . time() . '-' . basename($file['name']);
+    $relativePath = $folders . time() . '-' . basename($image['name']);
 
     
-    if (move_uploaded_file($file['tmp_name'], ASSETS_URL . $relativePath)) {
+    if (move_uploaded_file($image['tmp_name'], ASSETS_PATH . $relativePath)) {
       return $relativePath;
     }
     return '';
   }
 
 
-  public function remove(string $imagePath)
+  public function remove(string $path)
   {
-    if(file_exists(ASSETS_URL . $imagePath)){
-      unlink(ASSETS_URL . $imagePath);
+    if(file_exists(ASSETS_PATH . $path)){
+      unlink(ASSETS_PATH . $path);
     }
   }
 
   protected function createFolders(string $path)
   {
-    if(!file_exists(ASSETS_URL . $path)){
-      mkdir(ASSETS_URL . $path, 0755, true);
+    if(!file_exists(ASSETS_PATH . $path)){
+      mkdir(ASSETS_PATH . $path, 0755, true);
     }
   }
 }

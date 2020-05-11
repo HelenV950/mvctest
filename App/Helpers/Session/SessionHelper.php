@@ -21,6 +21,14 @@ class SessionHelper
     return empty($_SESSION['user_data']['id']);
   }
 
+ /**
+   * @return mixed
+   */
+  public static function getUserNickName()
+  {
+    return empty($_SESSION['user_data']['nickname']);
+  }
+
    /**
    * @param $id
    */

@@ -23,8 +23,5 @@ class Model
         }
     }
 
-    function getPDO(): PDO
-    {
-        return new PDO('mysql:host=localhost;dbname=mvc', "root", '');
-    }
+   
 }

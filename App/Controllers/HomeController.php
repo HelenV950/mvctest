@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Components\Controller;
 use App\Components\View;
+use App\Models\Post;
 
 /**
  * Home controler
@@ -19,6 +20,10 @@ class HomeController extends Controller
 
   public function actionIndex()
   {
-    View::render('home/index.php');
+    $post = new Post();
+    $postData= $post->getAllPost();
+ 
+
+    View::render('home/index.php', ['data' => $postData]);
   }
 }

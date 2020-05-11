@@ -13,7 +13,9 @@ namespace App\Components;
    */
   protected $rules = [];
 
-  
+  /**
+   * @return bool
+   */
  public function validate(array $request)
 {
   foreach ($request as $key => $field) {
